@@ -1,35 +1,43 @@
 #include"stdio.h"
 
-//賃金の計算
-int Recursive(int n)
+//再帰的賃金の計算
+int RecursiveResult(int t,int houlyWage)
 {
-	if (n <= 1)
+	if (t <= 0)
 	{
-		return(1);
+		return 0;
 	}
-
-	return (n * Recursive(n - 1));
+	
+	return  RecursiveResult(t - 1, houlyWage * 2 - 50) + houlyWage;
 }
 
-//比較
-int Compare(int a,int b)
+//一般的な賃金の計算
+int GeneralResult(int t, int houlyWage)
 {
-	if (a >= b)
+	return t * houlyWage;
+}
+
+//賃金の比較
+int Compare(int generalWage,int recursiveWage)
+{
+	if (generalWage >= recursiveWage)
 	{
-		return printf("%dの方が儲かっている\n",a);
+		return printf("一般的な賃金の方が儲かっている\n");
 	}
-	return printf("%dの方が儲かっている\n", b);
+	return printf("再帰的な賃金の方が儲かっている\n");
 }
 
 int main()
 {
-	int n = 10;	//階乗する値
-	int result; //計算結果
-	//一般的な賃金
-	const int generalWage = 1072;
+	int t = 2;					//時間
+	int generalWage = 1072;		//一般的な賃金
+	int recursiveWage = 100;	//再帰的な賃金
 
-	result = Recursive(n);
-	printf("%dの階乗 = %d\n", n, result);
-	Compare(generalWage, result);
+	//各賃金の値
+	printf("一般的な賃金%d\n", GeneralResult(t, generalWage));
+	printf("再帰的な賃金%d\n", RecursiveResult(t, recursiveWage));
+	//賃金の比較
+	Compare(generalWage, recursiveWage);
 
+	return 0;
 }
