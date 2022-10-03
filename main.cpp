@@ -1,27 +1,35 @@
 #include"stdio.h"
 
-//関数テンプレート
-template<typename Type>
-Type Min(Type a, Type b)
+//賃金の計算
+int Recursive(int n)
+{
+	if (n <= 1)
+	{
+		return(1);
+	}
+
+	return (n * Recursive(n - 1));
+}
+
+//比較
+int Compare(int a,int b)
 {
 	if (a >= b)
 	{
-		return static_cast<Type>(b);
+		return printf("%dの方が儲かっている\n",a);
 	}
-	return static_cast<Type>(a);
-}
-
-//テンプレートの特殊化(オーバーライド)
-template<>
-char Min<char>(char a, char b)
-{
-	return printf("数字以外は代入できません");
+	return printf("%dの方が儲かっている\n", b);
 }
 
 int main()
 {
-	printf("%d\n", Min<int>(114, 514));
-	printf("%f\n", Min<float>(114, 514));
-	printf("%lf\n",Min<double>(114, 514));
-	printf("%c\n", Min<char>(114, 514));
+	int n = 10;	//階乗する値
+	int result; //計算結果
+	//一般的な賃金
+	const int generalWage = 1072;
+
+	result = Recursive(n);
+	printf("%dの階乗 = %d\n", n, result);
+	Compare(generalWage, result);
+
 }
