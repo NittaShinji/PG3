@@ -4,39 +4,46 @@
 #include <windows.h>
 #include <time.h>
 
-typedef void (*PFunc)(int *);
+typedef void (*PFunc)(int*, int*, int*);
 
 //コールバック関数
-void CallBack1(int *s)
+void CallBack1(int* s, int* correct, int* playerNum)
 {
-	printf("%d秒後に実行されるよ\n", *s);
+	//偶数
+	if (*playerNum % 2 == *correct)
+	{
+		printf("当たりです\n");
+	}
+	//奇数
+	else if (*playerNum % 2 != *correct)
+	{
+		printf("外れです\n");
+		if (*correct == 0)
+		{
+			printf("ダイスは偶数\n");
+		}
+		if (*correct == 1)
+		{
+			printf("ダイスは奇数\n");
+		}
+	}
+	else {}
 }
 
-//何秒後に呼び出す関数
-void SetTimeOut(PFunc p,int second)
+
+void SetTimeOut(PFunc p, int second, int correct, int playerNum)
 {
+	//何秒間待つ
+	Sleep(second * 1000);
 	//コールバック関数を呼び出す
-	Sleep(second);
-}
-
-//正解を出力する関数
-void ShowCorrect(int correct)
-{
-	if (correct == 0)
-	{
-		printf("ダイスは偶数\n");
-	}
-	if (correct == 1)
-	{
-		printf("ダイスは奇数\n");
-	}
+	p(&second, &correct, &playerNum);
 }
 
 int main()
 {
-	//プレイヤー入力用の変数
-	int playerNum = 0;
-	scanf_s("%d",&playerNum);
+	//関数ポインタ
+	PFunc p;
+	p = CallBack1;
 
 	//サイコロの値
 	srand(time(nullptr));
@@ -44,28 +51,15 @@ int main()
 
 	//正解の値の判別(偶数か奇数か)
 	int correct = diceNum % 2;
-	
-	//関数ポインタ
-	PFunc p;
-	p = CallBack1;
+
+	printf("偶数か奇数を入力してください\n");
+	//プレイヤー入力
+	int playerNum = 0;
+	scanf_s("%d", &playerNum);
 
 	printf("抽選スタート\n");
-	//＜入力受付＞
-	//偶数
-	if (playerNum % 2 == correct)
-	{
-		SetTimeOut(p, 3000);
-		printf("当たりです\n");
-		ShowCorrect(correct);
-	}
-	//奇数
-	else if (playerNum % 2 != correct)
-	{
-		SetTimeOut(p, 3000);
-		printf("外れです\n");
-		ShowCorrect(correct);
-	}
-	else {}
+	//三秒待って結果を表示
+	SetTimeOut(p, 3, correct, playerNum);
 
 	return 0;
 }
