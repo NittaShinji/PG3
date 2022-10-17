@@ -1,13 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <ctype.h>
 #include <windows.h>
 #include <time.h>
+#include <functional>
 
 typedef void (*PFunc)(int*, int*, int*);
 
 //コールバック関数
-void CallBack1(int* s, int* correct, int* playerNum)
+void CallBack1(int *s, int *correct, int *playerNum)
 {
 	//偶数
 	if (*playerNum % 2 == *correct)
@@ -30,7 +30,6 @@ void CallBack1(int* s, int* correct, int* playerNum)
 	else {}
 }
 
-
 void SetTimeOut(PFunc p, int second, int correct, int playerNum)
 {
 	//何秒間待つ
@@ -39,7 +38,7 @@ void SetTimeOut(PFunc p, int second, int correct, int playerNum)
 	p(&second, &correct, &playerNum);
 }
 
-int main()
+int main(int argc, const char *argv[])
 {
 	//関数ポインタ
 	PFunc p;
@@ -49,8 +48,9 @@ int main()
 	srand(time(nullptr));
 	int diceNum = rand() % 6 + 1;
 
+	//ラムダ式
 	//正解の値の判別(偶数か奇数か)
-	int correct = diceNum % 2;
+	std::function<int(void)> correct = [=]{return diceNum % 2; };
 
 	printf("偶数か奇数を入力してください\n");
 	//プレイヤー入力
@@ -59,7 +59,7 @@ int main()
 
 	printf("抽選スタート\n");
 	//三秒待って結果を表示
-	SetTimeOut(p, 3, correct, playerNum);
+	SetTimeOut(p, 3, correct(), playerNum);
 
 	return 0;
 }
