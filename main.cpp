@@ -56,6 +56,7 @@ int main()
 	{
 		SetTimeOut(p, 3000);
 		printf("“–‚½‚è‚Å‚·\n");
+		ShowCorrect(correct);
 	}
 	//Šï”
 	else if (playerNum % 2 != correct)
