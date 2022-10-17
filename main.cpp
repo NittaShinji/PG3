@@ -24,12 +24,13 @@ int Compare(int generalWage,int recursiveWage)
 	{
 		return printf("一般的な賃金の方が儲かっている\n");
 	}
+	
 	return printf("再帰的な賃金の方が儲かっている\n");
 }
 
 int main()
 {
-	int t = 2;					//時間
+	int t = 8;					//時間
 	int generalWage = 1072;		//一般的な賃金
 	int recursiveWage = 100;	//再帰的な賃金
 
@@ -37,7 +38,7 @@ int main()
 	printf("一般的な賃金%d\n", GeneralResult(t, generalWage));
 	printf("再帰的な賃金%d\n", RecursiveResult(t, recursiveWage));
 	//賃金の比較
-	Compare(generalWage, recursiveWage);
+	Compare(GeneralResult(t, generalWage), RecursiveResult(t, recursiveWage));
 
 	return 0;
 }
