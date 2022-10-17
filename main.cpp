@@ -4,8 +4,8 @@
 #include <time.h>
 #include <functional>
 
-//コールバック関数
-void CallBack(int correct, int playerNum)
+//結果を表示する関数
+void ShowDown(int correct, int playerNum)
 {
 	//偶数
 	if (playerNum % 2 == correct)
@@ -33,22 +33,21 @@ int main(int argc, const char *argv[])
 	//サイコロの値
 	srand(time(nullptr));
 	int diceNum = rand() % 6 + 1;
-
-	//ラムダ式
-	//乱数から値の判別(偶数か奇数か)
-	auto correct = [=]{return diceNum % 2; };
+	//サイコロの乱数から値の判別(偶数か奇数か)
+	int correct = diceNum % 2;
 	
-	printf("偶数か奇数を入力してください\n");
 	//プレイヤー入力
+	printf("偶数か奇数を入力してください\n");
 	int playerNum = 0;
 	scanf_s("%d", &playerNum);
-
 	printf("抽選スタート\n");
-	//三秒待つ
+	
+	//3秒待つ
 	std::function<void(int)> setSleep = [](int second) {Sleep(second * 1000); };
 	setSleep(3);
+
 	//結果を表示
-	CallBack(correct(), playerNum);
+	ShowDown(correct, playerNum);
 
 	return 0;
 }
