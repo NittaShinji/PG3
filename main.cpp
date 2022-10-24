@@ -6,7 +6,7 @@
 typedef void (*PFunc)(int*, int*);
 
 //コールバック関数
-void CallBack1(int* correct, int* playerNum)
+void CallBack(int* correct, int* playerNum)
 {
 	//偶数
 	if (*playerNum % 2 == *correct)
