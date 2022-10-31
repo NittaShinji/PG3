@@ -6,7 +6,7 @@
 typedef void (*PFunc)(int*, int*);
 
 //コールバック関数
-void CallBack(int* correct, int* playerNum)
+void Lottery(int* correct, int* playerNum)
 {
 	//偶数
 	if (*playerNum % 2 == *correct)
@@ -41,7 +41,7 @@ int main()
 {
 	//関数ポインタ
 	PFunc p;
-	p = CallBack1;
+	p = Lottery;
 
 	//サイコロの値
 	srand(time(nullptr));
