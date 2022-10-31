@@ -4,30 +4,6 @@
 #include <time.h>
 #include <functional>
 
-//結果を表示する関数
-void ShowDown(int correct, int playerNum)
-{
-	//偶数
-	if (playerNum % 2 == correct)
-	{
-		printf("当たりです\n");
-	}
-	//奇数
-	else if (playerNum % 2 != correct)
-	{
-		printf("外れです\n");
-		if (correct == 0)
-		{
-			printf("ダイスは偶数\n");
-		}
-		if (correct == 1)
-		{
-			printf("ダイスは奇数\n");
-		}
-	}
-	else {}
-}
-
 int main(int argc, const char *argv[])
 {
 	//サイコロの値
@@ -41,13 +17,23 @@ int main(int argc, const char *argv[])
 	int playerNum = 0;
 	scanf_s("%d", &playerNum);
 	printf("抽選スタート\n");
-	
-	//3秒待つ
-	std::function<void(int)> setSleep = [](int second) {Sleep(second * 1000); };
-	setSleep(3);
 
-	//結果を表示
-	ShowDown(correct, playerNum);
+	//待ち時間
+	int waitTime = 3;
+	
+	//指定秒数待つ関数
+	std::function<void()> setSleep = [=]() {Sleep(waitTime * 1000); };
+	
+	//結果を表示する関数
+	std::function<void()> displayResult = [=]() {playerNum % 2 == correct ? printf("当たりです\n") : printf("外れです\n");};
+
+	//コールバック関数(先生のお手本型)
+	/*std::function<void(std::function<void()>, int)> setTimeOut = [](std::function<void()> fx, int second) {Sleep(second * 1000); fx();};
+	setTimeOut(displayResult, 3);*/
+
+	//待ってから実行する関数
+	std::function<void()> setTimeOut = [=]() {setSleep(); displayResult(); };
+	setTimeOut();
 
 	return 0;
 }
