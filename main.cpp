@@ -5,7 +5,7 @@
 
 typedef void (*PFunc)(int*, int*);
 
-//コールバック関数
+//抽選関数
 void Lottery(int* correct, int* playerNum)
 {
 	//偶数
