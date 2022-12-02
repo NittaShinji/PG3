@@ -10,6 +10,10 @@ void DoubleList::Initialize()
 	head.next = nullptr;
 	isClose = false;
 	displayNumber = 0;
+
+	Create(&head, 6);
+	Create(&head, 5);
+	Create(&head, 4);
 }
 
 void DoubleList::Update()
@@ -122,9 +126,11 @@ void DoubleList::DisplayUpdate()
 		printf("9.要素操作に戻る\n");
 		printf("\n");
 		printf("操作の選択をしてください\n");
-		scanf_s("%d", &displayNumber);
-		scanf_s("%*[^\n]%*c");
-
+		while (displayNumber != 1 && displayNumber != 2 && displayNumber != 9)
+		{
+			scanf_s("%d", &displayNumber);
+			scanf_s("%*[^\n]%*c");
+		}
 	}
 	else if (displayNumber == 1)
 	{
@@ -138,8 +144,12 @@ void DoubleList::DisplayUpdate()
 		printf("--------------------------------------\n\n");
 		printf("1.要素の表示に戻る\n");
 		printf("2.要素の操作に戻る\n");
-		scanf_s("%d", &number);
-		scanf_s("%*[^\n]%*c");
+		while (number != 1 && number != 2)
+		{
+			scanf_s("%d", &number);
+			scanf_s("%*[^\n]%*c");
+		}
+
 		if (number == 1)
 		{
 			number = 0;
@@ -170,8 +180,11 @@ void DoubleList::DisplayUpdate()
 		printf("1.要素の表示に戻る\n");
 		printf("2.要素の操作に戻る\n");
 
-		scanf_s("%d", &returnNumber);
-		scanf_s("%*[^\n]%*c");
+		while (returnNumber != 1 && returnNumber != 2)
+		{
+			scanf_s("%d", &returnNumber);
+			scanf_s("%*[^\n]%*c");
+		}
 
 		if (returnNumber == 1)
 		{
@@ -229,22 +242,22 @@ void DoubleList::EditUpdate()
 	
 	if (notFindNumber == false)
 	{
-		printf("%d番目の要素の変更する値を入力してください。\n",editNumber);
+		printf("%d番目の要素の変更後の値を入力してください。\n",editNumber);
 		scanf_s("%d", &changeNumber);
 		scanf_s("%*[^\n]%*c");
 		printf("\n");
 		printf("\n");
 		changeCell = GetInsertCellAddress(&head, editNumber);
 		changeCell->value = changeNumber;
+		printf("%d番目の要素の値が%dに変更されました\n",editNumber,changeNumber);
 	}
-	//printf("x番目の要素の値が"xx"に変更されました");
+	
 	else if (notFindNumber == true)
 	{
-		printf("x番目の要素が見つかりませんでした。\n");
+		printf("%d番目の要素が見つかりませんでした。\n",editNumber);
 		notFindNumber = false;
 	}
-	//printf("※x番目がない場合\n");
-	
+
 	ReturnHome();
 }
 
@@ -255,6 +268,12 @@ void DoubleList::DeleteUpdate()
 	int deleteNumber = 0;
 	printf("[要素の削除]\n");
 	printf("削除したい要素の番号を指定してください。\n");
+
+	printf("要素一覧:\n");
+	printf("{\n\n");
+	Index(&head);
+	printf("}\n\n");
+
 	scanf_s("%d", &deleteNumber);
 	scanf_s("%*[^\n]%*c");
 	printf("\n");
@@ -263,6 +282,8 @@ void DoubleList::DeleteUpdate()
 	if (notFindNumber == false)
 	{
 		printf("%d番目の要素%dを削除しました\n", deleteNumber,deleteCell->value);
+		printf("表の順番が変わりました\n");
+
 		Delete(deleteCell);
 	}
 	else if(notFindNumber == true)
@@ -276,7 +297,6 @@ void DoubleList::DeleteUpdate()
 
 void DoubleList::SortUpdate()
 {
-
 	CELL* changeA;
 	CELL* changeB;
 
@@ -288,6 +308,12 @@ void DoubleList::SortUpdate()
 	printf("[要素の並び替え]\n");
 	printf("要素番号AとBを入れ替えます。\n");
 	printf("並び替えたい要素Aの番号を指定してください。\n");
+
+	printf("要素一覧:\n");
+	printf("{\n\n");
+	Index(&head);
+	printf("}\n\n");
+
 	scanf_s("%d", &numberA);
 	scanf_s("%*[^\n]%*c");
 	changeA = GetInsertCellAddress(&head, numberA);
@@ -378,15 +404,27 @@ void DoubleList::Delete(CELL* currentCell)
 		CELL* nextCell = currentCell->next;
 		nextCell->prev = oldCell;
 		oldCell->next = nextCell;
+		currentCell->prev = nullptr;
+		currentCell->next = nullptr;
 	}
+	else if(currentCell->prev)
+	{
+		CELL* oldCell = currentCell->prev;
+		CELL* nextCell = currentCell->next;
+		oldCell->next = nullptr;
+		nextCell->prev = nullptr;
+		nextCell->next = nullptr;
+	}
+	else{}
 
 	delete currentCell;
+	currentCell = nullptr;
 }
 
 //セルの一覧表示
 void DoubleList::Index(CELL* endCell)
 {
-	int no = 0;
+	int no = 1;
 	while (endCell->next != nullptr)
 	{
 		/*endCell = endCell->next;

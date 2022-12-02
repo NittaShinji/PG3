@@ -37,7 +37,7 @@ public:
 	//リスト作成
 	void Create(CELL* insertCell, int inputValue);
 	//リスト削除
-	void Delete(CELL* deleteCell);
+	void Delete(CELL* currentCell);
 
 	//一覧を表示する関数
 	void Index(CELL *endCell);
@@ -93,6 +93,7 @@ private:
 	//追加する要素
 	int value = 0;
 
+	bool isDelete = false;
 
 public:
 
