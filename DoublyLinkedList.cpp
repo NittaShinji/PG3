@@ -2,6 +2,7 @@
 #include "stdio.h"
 #include "stdlib.h"
 
+//初期化
 template <typename T>
 void DoubleList<T>::Initialize()
 {
@@ -17,6 +18,7 @@ void DoubleList<T>::Initialize()
 	Create(&head, 4);
 }
 
+//全体の更新
 template <typename T>
 void DoubleList<T>::Update()
 {
@@ -58,6 +60,7 @@ void DoubleList<T>::Update()
 	}
 }
 
+//初期化更新
 template <typename T>
 void DoubleList<T>::InitialUpdate()
 {
@@ -105,6 +108,7 @@ void DoubleList<T>::InitialUpdate()
 	}
 }
 
+//表示更新
 template <typename T>
 void DoubleList<T>::DisplayUpdate()
 {
@@ -204,6 +208,7 @@ void DoubleList<T>::DisplayUpdate()
 	}
 }
 
+//挿入
 template <typename T>
 void DoubleList<T>::InsertUpdate()
 {
@@ -243,6 +248,7 @@ void DoubleList<T>::InsertUpdate()
 	ReturnHome();
 }
 
+//編集
 template <typename T>
 void DoubleList<T>::EditUpdate()
 {
@@ -279,6 +285,7 @@ void DoubleList<T>::EditUpdate()
 	ReturnHome();
 }
 
+//削除
 template <typename T>
 void DoubleList<T>::DeleteUpdate()
 {
@@ -313,6 +320,7 @@ void DoubleList<T>::DeleteUpdate()
 	ReturnHome();
 }
 
+//並び替え
 template <typename T>
 void DoubleList<T>::SortUpdate()
 {
@@ -485,6 +493,7 @@ CELL<T>* DoubleList<T>::MoveEndCell(CELL<T>* endCell)
 	return endCell;
 }
 
+//ホームに戻る
 template <typename T>
 void DoubleList<T>::ReturnHome()
 {

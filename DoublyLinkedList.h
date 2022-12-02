@@ -15,6 +15,7 @@ class DoubleList
 
 private:
 
+	//ÉVÅ[Éì
 	enum class Scene
 	{
 		INITIAL,
