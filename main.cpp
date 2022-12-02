@@ -17,7 +17,6 @@ int main()
 		}
 	}
 
-	/*doubleList->Update();*/
 	delete doubleList;
 
 	return 0;

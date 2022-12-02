@@ -3,7 +3,6 @@
 //双方向リストの構造体
 typedef struct CELL
 {
-	//char name[16]{};
 	int value;
 	struct  CELL* prev;
 	struct  CELL* next;
@@ -43,6 +42,8 @@ public:
 	void Index(CELL *endCell);
 	//番号表示
 	void IndexNumber(CELL* endCell);
+	//最後のセルまで回す
+	CELL* MoveEndCell(CELL* endCell);
 
 	////要素項目の関数
 	//初期画面
@@ -57,48 +58,36 @@ public:
 	void DeleteUpdate();
 	//並び替え
 	void SortUpdate();
-
+	//ホームに戻る
 	void ReturnHome();
-
-	//描画
-	void DrawMessage();
-	void DisplayComponents();
 
 	//挿入したいセルのアドレスを取得
 	CELL* GetInsertCellAddress(CELL *head,int iterator);
 
 private:
 
-	bool isClose;
-	bool isWorked;
-	int iterator;
-	int inputValue;
-	Scene scene;
-	CELL* insertCell;
 	//先頭に内容が空のセルを宣言
 	CELL head;
-
-	CELL* displayCell;
+	//イテレーター
+	int iterator;
 	
-
+	//シーン
+	Scene scene;
+	//操作番号
 	int sceneNumber = 0;
-	//int InputSceneNum;
+	//表示操作の番号
 	int displayNumber;
-
-	//ホームに帰る用のキー保存変数
+	//操作のホーム画面に帰る用のキー保存変数
 	int returnNumber = 0;
+	//終了用の変数
+	bool isClose;
 
+	//入力されたキーが見つからないときのフラグ
 	bool notFindNumber = false;
-
-	//追加する場所の数
-	int insertNum = 0;
-	//追加する要素
-	int value = 0;
-
-	bool isDelete = false;
 
 public:
 
+	//ゲッター
 	bool GetisClose() { return isClose; };
 
 };

@@ -54,20 +54,7 @@ void DoubleList::Update()
 	default:
 		break;
 	}
-
-	//printf("‰½”Ô–Ú‚ÌƒZƒ‹‚ÌŒã‚ë‚É‘}“ü‚µ‚Ü‚·‚©\n");
-	//scanf_s("%d", &iterator);
-
-	//printf("‘}“ü‚·‚é’l‚ð“ü—Í‚µ‚Ä‚­‚¾‚³‚¢\n");
-	//scanf_s("%d", &inputValue);
-
-	////”CˆÓ‚ÌƒZƒ‹‚ÌŒã‚ë‚É’Ç‰Á
-	//insertCell = GetInsertCellAddress(&head,iterator);
-	//Create(insertCell, inputValue);
-
-	//Index(&head);
 }
-
 
 void DoubleList::InitialUpdate()
 {
@@ -115,9 +102,10 @@ void DoubleList::InitialUpdate()
 	}
 }
 
-
 void DoubleList::DisplayUpdate()
 {
+	CELL* displayCell;
+
 	if (displayNumber == 0)
 	{
 		printf("[—v‘f‚Ì•\Ž¦]\n");
@@ -214,8 +202,14 @@ void DoubleList::DisplayUpdate()
 
 void DoubleList::InsertUpdate()
 {
+	CELL* insertCell;
+	//’Ç‰Á‚·‚éêŠ‚Ì”
+	int insertNum = 0;
+	//’Ç‰Á‚·‚é—v‘f
+	int value = 0;
+
 	printf("[ƒŠƒXƒg—v‘f‚Ì‘}“ü]\n");
-	printf("—v‘f‚ð’Ç‰Á‚·‚éêŠ‚ðŽw’è‚µ‚Ä‚­‚¾‚³‚¢BÅŒã”ö‚É‚Â‚¢‚©‚·‚éê‡‚Í‰½‚à“ü—Í‚µ‚È‚¢‚Å‚­‚¾‚³‚¢B\n");
+	printf("—v‘f‚ð’Ç‰Á‚·‚éêŠ‚ðŽw’è‚µ‚Ä‚­‚¾‚³‚¢BÅŒã”ö‚É‚Â‚¢‚©‚·‚éê‡‚Í0‚ð“ü—Í‚µ‚Ä‚­‚¾‚³‚¢B\n");
 	scanf_s("%d", &insertNum);
 	scanf_s("%*[^\n]%*c");
 	printf("\n");
@@ -224,10 +218,21 @@ void DoubleList::InsertUpdate()
 	scanf_s("%*[^\n]%*c");
 	printf("\n");
 	
-	GetInsertCellAddress(&head, insertNum);
-	Create(&head, value);
+	if (insertNum == 0)
+	{
+		int size = sizeof(head);
 
-	printf("—v‘f%d‚ª%d”Ô–Ú‚É‘}“ü‚³‚ê‚Ü‚µ‚½B\n",value,insertNum);
+		insertCell = MoveEndCell(&head);
+		Create(insertCell, value);
+		printf("—v‘f%d‚ªÅŒã‚É‘}“ü‚³‚ê‚Ü‚µ‚½B\n", value);
+	}
+	else if (insertNum != 0)
+	{
+		insertCell = GetInsertCellAddress(&head, insertNum);
+		Create(insertCell, value);
+		printf("—v‘f%d‚ª%d”Ô–Ú‚É‘}“ü‚³‚ê‚Ü‚µ‚½B\n", value, insertNum);
+	}
+	
 	printf("\n");
 
 	ReturnHome();
@@ -267,7 +272,6 @@ void DoubleList::EditUpdate()
 
 	ReturnHome();
 }
-
 
 void DoubleList::DeleteUpdate()
 {
@@ -434,14 +438,6 @@ void DoubleList::Index(CELL* endCell)
 	int no = 1;
 	while (endCell->next != nullptr)
 	{
-		/*endCell = endCell->next;
-		printf("%d\n", no);
-		printf("%p\n", endCell->prev);
-		printf("%5d\n", endCell->value);
-		printf("(%p)\n", endCell);
-		printf("%p\n", endCell->next);
-		no++;*/
-
 		endCell = endCell->next;
 		printf("%d:%d,\n", no,endCell->value);
 		no++;
@@ -456,20 +452,23 @@ void DoubleList::IndexNumber(CELL* endCell)
 	int no = 1;
 	while (endCell->next != nullptr)
 	{
-		/*endCell = endCell->next;
-		printf("%d\n", no);
-		printf("%p\n", endCell->prev);
-		printf("%5d\n", endCell->value);
-		printf("(%p)\n", endCell);
-		printf("%p\n", endCell->next);
-		no++;*/
-
 		endCell = endCell->next;
 		printf("%d:\n", no);
 		no++;
 	}
 
 	printf("\n");
+}
+
+//ƒZƒ‹‚ÌÅŒã‚Ü‚Å•\Ž¦
+CELL* DoubleList::MoveEndCell(CELL* endCell)
+{
+	while (endCell->next != nullptr)
+	{
+		endCell = endCell->next;
+	}
+	
+	return endCell;
 }
 
 void DoubleList::ReturnHome()
