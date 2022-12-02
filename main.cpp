@@ -11,6 +11,10 @@ int main()
 	while (1)
 	{
 		doubleList->Update();
+		if (doubleList->GetisClose())
+		{
+			break;
+		}
 	}
 
 	/*doubleList->Update();*/
