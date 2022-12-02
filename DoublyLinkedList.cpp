@@ -166,9 +166,16 @@ void DoubleList::DisplayUpdate()
 	else if (displayNumber == 2)
 	{
 		int number = 0;
-		
+		int listSize = 0;
+
 		printf("\n[順番を指定して要素を表示]\n");
 		printf("表示したい要素の順番を指定してください。\n");
+
+		printf("要素一覧:\n");
+		printf("{\n\n");
+		IndexNumber(&head);
+		printf("}\n\n");
+
 		scanf_s("%d", &number);
 		scanf_s("%*[^\n]%*c");
 		printf("\n");
@@ -437,6 +444,28 @@ void DoubleList::Index(CELL* endCell)
 
 		endCell = endCell->next;
 		printf("%d:%d,\n", no,endCell->value);
+		no++;
+	}
+
+	printf("\n");
+}
+
+//セルの番号表示
+void DoubleList::IndexNumber(CELL* endCell)
+{
+	int no = 1;
+	while (endCell->next != nullptr)
+	{
+		/*endCell = endCell->next;
+		printf("%d\n", no);
+		printf("%p\n", endCell->prev);
+		printf("%5d\n", endCell->value);
+		printf("(%p)\n", endCell);
+		printf("%p\n", endCell->next);
+		no++;*/
+
+		endCell = endCell->next;
+		printf("%d:\n", no);
 		no++;
 	}
 

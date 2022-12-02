@@ -41,6 +41,8 @@ public:
 
 	//ˆê——‚ğ•\¦‚·‚éŠÖ”
 	void Index(CELL *endCell);
+	//”Ô†•\¦
+	void IndexNumber(CELL* endCell);
 
 	////—v‘f€–Ú‚ÌŠÖ”
 	//‰Šú‰æ–Ê
