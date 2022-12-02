@@ -4,8 +4,8 @@
 int main()
 {
 	//æ“ª‚ÌƒZƒ‹‚ÌéŒ¾
-	DoubleList* doubleList = nullptr;
-	doubleList = new DoubleList;
+	DoubleList<int>* doubleList = nullptr;
+	doubleList = new DoubleList<int>;
 	doubleList->Initialize();
 	
 	while (1)

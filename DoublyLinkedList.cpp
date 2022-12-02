@@ -2,7 +2,8 @@
 #include "stdio.h"
 #include "stdlib.h"
 
-void DoubleList::Initialize()
+template <typename T>
+void DoubleList<T>::Initialize()
 {
 	scene = Scene::INITIAL;
 	//先頭に内容が空のセルを宣言
@@ -16,7 +17,8 @@ void DoubleList::Initialize()
 	Create(&head, 4);
 }
 
-void DoubleList::Update()
+template <typename T>
+void DoubleList<T>::Update()
 {
 	switch (scene)
 	{
@@ -56,13 +58,14 @@ void DoubleList::Update()
 	}
 }
 
-void DoubleList::InitialUpdate()
+template <typename T>
+void DoubleList<T>::InitialUpdate()
 {
 	sceneNumber = 0;
 	printf("[要素の操作]\n");
 	printf("1.要素の表示\n");
 	printf("2.要素の挿入\n");
-	if (sizeof(CELL) != 0)
+	if (sizeof(CELL<T>) != 0)
 	{
 		printf("3.要素の編集\n");
 		printf("4.要素の削除\n");
@@ -102,9 +105,10 @@ void DoubleList::InitialUpdate()
 	}
 }
 
-void DoubleList::DisplayUpdate()
+template <typename T>
+void DoubleList<T>::DisplayUpdate()
 {
-	CELL* displayCell;
+	CELL<T>* displayCell;
 
 	if (displayNumber == 0)
 	{
@@ -200,9 +204,10 @@ void DoubleList::DisplayUpdate()
 	}
 }
 
-void DoubleList::InsertUpdate()
+template <typename T>
+void DoubleList<T>::InsertUpdate()
 {
-	CELL* insertCell;
+	CELL<T>* insertCell;
 	//追加する場所の数
 	int insertNum = 0;
 	//追加する要素
@@ -238,9 +243,10 @@ void DoubleList::InsertUpdate()
 	ReturnHome();
 }
 
-void DoubleList::EditUpdate()
+template <typename T>
+void DoubleList<T>::EditUpdate()
 {
-	CELL* changeCell;
+	CELL<T>* changeCell;
 	int editNumber = 0;
 	int changeNumber = 0;
 	printf("[要素の編集]\n");
@@ -273,9 +279,10 @@ void DoubleList::EditUpdate()
 	ReturnHome();
 }
 
-void DoubleList::DeleteUpdate()
+template <typename T>
+void DoubleList<T>::DeleteUpdate()
 {
-	CELL* deleteCell;
+	CELL<T>* deleteCell;
 	int deleteNumber = 0;
 	printf("[要素の削除]\n");
 	printf("削除したい要素の番号を指定してください。\n");
@@ -306,10 +313,11 @@ void DoubleList::DeleteUpdate()
 	ReturnHome();
 }
 
-void DoubleList::SortUpdate()
+template <typename T>
+void DoubleList<T>::SortUpdate()
 {
-	CELL* changeA;
-	CELL* changeB;
+	CELL<T>* changeA;
+	CELL<T>* changeB;
 
 	int numberA = 0;
 	int numberB = 0;
@@ -363,7 +371,8 @@ void DoubleList::SortUpdate()
 }
 
 //任意の位置のアドレスを取得
-CELL* DoubleList::GetInsertCellAddress(CELL* endCELL, int iterator)
+template <typename T>
+CELL<T>* DoubleList<T>::GetInsertCellAddress(CELL<T>* endCELL, int iterator)
 {
 	for (int i = 0; i < iterator; i++)
 	{
@@ -383,11 +392,12 @@ CELL* DoubleList::GetInsertCellAddress(CELL* endCELL, int iterator)
 }
 
 //値の追加
-void DoubleList::Create(CELL *currentCell, int inputValue)
+template <typename T>
+void DoubleList<T>::Create(CELL<T> *currentCell, T inputValue)
 {
 	// 新規にセルを作成
-	CELL* newCell;
-	newCell = (CELL*)malloc(sizeof(CELL));
+	CELL<T>* newCell;
+	newCell = (CELL<T>*)malloc(sizeof(CELL<T>));
 	newCell->value = inputValue;
 	newCell->prev = currentCell;
 	newCell->next = currentCell->next;
@@ -396,7 +406,7 @@ void DoubleList::Create(CELL *currentCell, int inputValue)
 	//「前のセルのポインタ」に新規セルのアドレスを代入(1,2,3の3の前セル)
 	if (currentCell->next)
 	{
-		CELL* nextCell = currentCell->next;
+		CELL<T>* nextCell = currentCell->next;
 		nextCell->prev = newCell;
 	}
 
@@ -405,14 +415,15 @@ void DoubleList::Create(CELL *currentCell, int inputValue)
 }
 
 //要素の削除
-void DoubleList::Delete(CELL* currentCell)
+template <typename T>
+void DoubleList<T>::Delete(CELL<T>* currentCell)
 {
 	// 指定したセルの次のセルの
 	//「前のセルのポインタ」に指定したセルの前のアドレスを代入(1,2,3の3の前セル)
 	if (currentCell->next)
 	{
-		CELL* oldCell = currentCell->prev;
-		CELL* nextCell = currentCell->next;
+		CELL<T>* oldCell = currentCell->prev;
+		CELL<T>* nextCell = currentCell->next;
 		nextCell->prev = oldCell;
 		oldCell->next = nextCell;
 		currentCell->prev = nullptr;
@@ -420,8 +431,8 @@ void DoubleList::Delete(CELL* currentCell)
 	}
 	else if(currentCell->prev)
 	{
-		CELL* oldCell = currentCell->prev;
-		CELL* nextCell = currentCell->next;
+		CELL<T>* oldCell = currentCell->prev;
+		CELL<T>* nextCell = currentCell->next;
 		oldCell->next = nullptr;
 		nextCell->prev = nullptr;
 		nextCell->next = nullptr;
@@ -433,7 +444,8 @@ void DoubleList::Delete(CELL* currentCell)
 }
 
 //セルの一覧表示
-void DoubleList::Index(CELL* endCell)
+template <typename T>
+void DoubleList<T>::Index(CELL<T>* endCell)
 {
 	int no = 1;
 	while (endCell->next != nullptr)
@@ -447,7 +459,8 @@ void DoubleList::Index(CELL* endCell)
 }
 
 //セルの番号表示
-void DoubleList::IndexNumber(CELL* endCell)
+template <typename T>
+void DoubleList<T>::IndexNumber(CELL<T>* endCell)
 {
 	int no = 1;
 	while (endCell->next != nullptr)
@@ -461,7 +474,8 @@ void DoubleList::IndexNumber(CELL* endCell)
 }
 
 //セルの最後まで表示
-CELL* DoubleList::MoveEndCell(CELL* endCell)
+template <typename T>
+CELL<T>* DoubleList<T>::MoveEndCell(CELL<T>* endCell)
 {
 	while (endCell->next != nullptr)
 	{
@@ -471,7 +485,8 @@ CELL* DoubleList::MoveEndCell(CELL* endCell)
 	return endCell;
 }
 
-void DoubleList::ReturnHome()
+template <typename T>
+void DoubleList<T>::ReturnHome()
 {
 	printf("9.要素操作に戻る\n");
 
@@ -489,3 +504,11 @@ void DoubleList::ReturnHome()
 		returnNumber = 0;
 	}
 }
+
+template class DoubleList<int>;
+template class DoubleList<float>;
+template class DoubleList<double>;
+
+template class CELL<int>;
+template class CELL<float>;
+template class CELL<double>;

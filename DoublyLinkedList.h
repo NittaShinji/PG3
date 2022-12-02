@@ -1,13 +1,15 @@
 #pragma once
 
 //双方向リストの構造体
-typedef struct CELL
+template <typename T>
+struct CELL
 {
-	int value;
+	T value;
 	struct  CELL* prev;
 	struct  CELL* next;
 };
 
+template <typename T>
 class DoubleList
 {	
 
@@ -34,16 +36,16 @@ public:
 	void Close();
 
 	//リスト作成
-	void Create(CELL* insertCell, int inputValue);
+	void Create(CELL<T>* insertCell, T inputValue);
 	//リスト削除
-	void Delete(CELL* currentCell);
+	void Delete(CELL<T>* currentCell);
 
 	//一覧を表示する関数
-	void Index(CELL *endCell);
+	void Index(CELL<T>*endCell);
 	//番号表示
-	void IndexNumber(CELL* endCell);
+	void IndexNumber(CELL<T>* endCell);
 	//最後のセルまで回す
-	CELL* MoveEndCell(CELL* endCell);
+	CELL<T>* MoveEndCell(CELL<T>* endCell);
 
 	////要素項目の関数
 	//初期画面
@@ -62,12 +64,12 @@ public:
 	void ReturnHome();
 
 	//挿入したいセルのアドレスを取得
-	CELL* GetInsertCellAddress(CELL *head,int iterator);
+	CELL<T>* GetInsertCellAddress(CELL<T>*head,int iterator);
 
 private:
 
 	//先頭に内容が空のセルを宣言
-	CELL head;
+	CELL<T> head;
 	//イテレーター
 	int iterator;
 	
