@@ -68,6 +68,7 @@ public:
 private:
 
 	bool isClose;
+	bool isWorked;
 	int iterator;
 	int inputValue;
 	Scene scene;
@@ -86,6 +87,12 @@ private:
 	int returnNumber = 0;
 
 	bool notFindNumber = false;
+
+	//’Ç‰Á‚·‚éêŠ‚Ì”
+	int insertNum = 0;
+	//’Ç‰Á‚·‚é—v‘f
+	int value = 0;
+
 
 public:
 

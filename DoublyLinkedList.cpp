@@ -33,12 +33,18 @@ void DoubleList::Update()
 
 	case Scene::EDIT:
 
+		EditUpdate();
+
 		break;
 
 	case Scene::DELETE:
+
+		DeleteUpdate();
 		break;
 
 	case Scene::SORT:
+
+		SortUpdate();
 		break;
 
 	default:
@@ -188,11 +194,6 @@ void DoubleList::DisplayUpdate()
 
 void DoubleList::InsertUpdate()
 {
-	//追加する場所の数
-	int insertNum = 0;
-	//追加する要素
-	int value = 0;
-	
 	printf("[リスト要素の挿入]\n");
 	printf("要素を追加する場所を指定してください。最後尾についかする場合は何も入力しないでください。\n");
 	scanf_s("%d", &insertNum);
@@ -269,6 +270,8 @@ void DoubleList::DeleteUpdate()
 		printf("%d番目の要素が見つかりませんでした。\n",deleteNumber);
 		notFindNumber = false;
 	}
+
+	ReturnHome();
 }
 
 void DoubleList::SortUpdate()
@@ -318,6 +321,8 @@ void DoubleList::SortUpdate()
 	}
 
 	printf("\n");
+
+	ReturnHome();
 }
 
 //任意の位置のアドレスを取得
@@ -403,8 +408,14 @@ void DoubleList::Index(CELL* endCell)
 void DoubleList::ReturnHome()
 {
 	printf("9.要素操作に戻る\n");
-	scanf_s("%d", &returnNumber);
-	scanf_s("%*[^\n]%*c");
+
+	//9以外が押された場合は再度入力させる。
+	while (returnNumber != 9)
+	{
+		scanf_s("%d", &returnNumber);
+		scanf_s("%*[^\n]%*c");
+	}
+
 	if (returnNumber == 9)
 	{
 		displayNumber = 0;
