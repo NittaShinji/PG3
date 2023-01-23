@@ -2,11 +2,11 @@
 
 SceneManager::SceneManager()
 {
-	sceneNo = Title;
-	sceneTimer = 60;
+	//初期化
+	sceneNo_ = 0;
 }
 
-SceneManager::~SceneManager(){}
+SceneManager::~SceneManager() {}
 
 SceneManager *SceneManager::GetInstance()
 {
@@ -18,33 +18,6 @@ SceneManager *SceneManager::GetInstance()
 
 void SceneManager::ChangeScene(int sceneNo)
 {
-	if (sceneTimer <= 0)
-	{
-		changeCount++;
-		if (sceneNo == Title)
-		{
-			sceneNo = NewGame;
-			sceneTimer = 120;
-		}
-		else if (sceneNo == NewGame)
-		{
-			sceneNo = GamePlay;
-			sceneTimer = 120;
-		}
-		else if (sceneNo == GamePlay)
-		{
-			sceneNo = GameClear;
-			sceneTimer = 120;
-		}
-		else if (sceneNo == GameClear)
-		{
-			sceneNo = Title;
-			sceneTimer = 120;
-		}
-		else {}
-	}
-	else
-	{
-		sceneTimer--;
-	}
+	//受取った次のシーン番号にシーンを変更
+	sceneNo_ = sceneNo;
 }

@@ -1,42 +1,41 @@
 #include "stdio.h"
 #include "stdlib.h"
-#include "string.h"
-
-//単方向リストの構造体を定義
-typedef struct Cell
-{
-	char name[16];
-	int lendDate;
-	int returnDate;
-	struct Cell* next;
-}; 
-
-//データを追加する関数
-void Create(Cell* head, const char* buf);
-//一覧を表示する関数
-void Index(Cell *head);
-
+#include <windows.h>
+#include "time.h"
 #include "SceneManager.h"
+
 
 int main()
 {
 	//インスタンスの取得
 	SceneManager* sceneManager = SceneManager::GetInstance();
 
+	//シーン番号
 	int sceneNo = 0;
-	int changeCount = 0;
+	//待つ秒数
+	const int second = 2;
 
-	while (changeCount < 100)
+	while (true)
 	{
-		changeCount = sceneManager->GetChangeCount();
 		//使用
 		sceneManager->ChangeScene(sceneNo);
-
-		printf("%d\n", changeCount);
-		printf("%d\n", sceneNo);
-
+		//表示
+		printf("%d\n", sceneManager->GetSceneNo());
+		//ループ処理
+		if(sceneNo < 4)
+		{
+			sceneNo++;
+		}
+		else
+		{
+			sceneNo = 0;
+		}
+		//2秒間待つ
+		Sleep(second * 1000);
 	}
 	
 	system("PAUSE");
 	return 0;
 }
+
+	
