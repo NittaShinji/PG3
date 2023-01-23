@@ -4,7 +4,6 @@
 #include "time.h"
 #include "SceneManager.h"
 
-
 int main()
 {
 	//インスタンスの取得
