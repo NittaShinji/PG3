@@ -1,4 +1,5 @@
 #include "Enemy.h"
+#include "stdio.h"
 
 int Enemy::hp_;
 

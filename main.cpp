@@ -23,10 +23,10 @@ int main()
 		enemy1->DamageEnemy();
 
 		//HP•\Ž¦
-		printf("%d\n", enemy1->GetEnemyHp());
-		printf("%d\n", enemy2->GetEnemyHp());
-		printf("%d\n", enemy3->GetEnemyHp());
-		printf("%d\n\n", enemy4->GetEnemyHp());
+		printf("“G‚ÌHP : %d\n", enemy1->GetEnemyHp());
+		printf("“G‚ÌHP : %d\n", enemy2->GetEnemyHp());
+		printf("“G‚ÌHP : %d\n", enemy3->GetEnemyHp());
+		printf("“G‚ÌHP : %d\n\n", enemy4->GetEnemyHp());
 
 		//‚à‚µ“G‚ªŽ€‚ñ‚Å‚¢‚½‚çƒQ[ƒ€‚ðI—¹‚·‚é
 		if(enemy1->GetEnemyHp() == 0)
