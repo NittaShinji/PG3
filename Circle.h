@@ -7,7 +7,7 @@ public:
 
 	using IShape::IShape;	//コンストラクタを継承
 	void Size() override;	//面積を求める
-	void Draw();			//面積を表示
+	void Draw() override;	//面積を表示
 
 private:
 
