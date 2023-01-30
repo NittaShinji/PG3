@@ -9,5 +9,5 @@ void Circle::Size()
 //–ÊÏ‚ğ•\¦
 void Circle::Draw()
 {
-	printf("%f\n", area);
+	printf("–ÊÏ : %f \n", area);
 }

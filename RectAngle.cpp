@@ -9,6 +9,6 @@ void RectAngle::Size()
 //–ÊÏ‚ğ•\¦
 void RectAngle::Draw()
 {
-	printf("%f\n", area);
+	printf("–ÊÏ : %f \n", area);
 }
 
