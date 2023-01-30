@@ -53,7 +53,7 @@ void Enemy::Escape()
 
 	//3•bŠÔ‘Ò‚Â
 	Sleep(second * 1000);
-	//
+	//Ú‹ßó‘Ô‚É•ÏX
 	phase_ = Phase::Approach;
 }
 
