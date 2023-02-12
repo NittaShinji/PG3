@@ -104,7 +104,6 @@ void System::DisplayUpdate()
 	{
 		printf("[タスクの表示]\n");
 		printf("1.タスクの一覧表示\n");
-		printf("2.順番を指定してタスクを表示\n");
 		printf("9.タスク操作に戻る\n");
 		printf("\n");
 		printf("操作の選択をしてください\n");
@@ -147,52 +146,15 @@ void System::DisplayUpdate()
 		}
 
 	}
-	else if(displayNumber == 2)
-	{
-		/*int number = 0;
-		int listSize = 0;
-
-		printf("\n[順番を指定してタスクを表示]\n");
-		printf("表示したいタスクの順番を指定してください。\n");
-
-		printf("タスク一覧:\n");
-		printf("{\n\n");
-		IndexNumber(&head);
-		printf("}\n\n");
-
-		scanf_s("%d", &number);
-		scanf_s("%*[^\n]%*c");
-		printf("\n");
-		printf("--------------------------------------\n");
-
-		displayCell = GetInsertCellAddress(&head, number);
-		printf("%5d\n", displayCell->value);
-
-		printf("1.タスクの表示に戻る\n");
-		printf("2.タスクの操作に戻る\n");
-
-		while(returnNumber != 1 && returnNumber != 2)
-		{
-			scanf_s("%d", &returnNumber);
-			scanf_s("%*[^\n]%*c");
-		}
-
-		if(returnNumber == 1)
-		{
-			displayNumber = 0;
-			returnNumber = 0;
-		}
-		else if(returnNumber == 2)
-		{
-			displayNumber = 0;
-			scene = Scene::INITIAL;
-			returnNumber = 0;
-		}*/
-	}
 	else if(displayNumber == 9)
 	{
 		displayNumber = 0;
 		scene = Scene::INITIAL;
+		returnNumber = 0;
+	}
+	else
+	{
+		ReturnHome();
 	}
 }
 
