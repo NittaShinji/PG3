@@ -13,7 +13,7 @@ public:
 	enum Priority
 	{
 		//高
-		HIGH,
+		HIGH = 1,
 		//中
 		Middle,
 		//低
@@ -60,11 +60,13 @@ private: //列挙型,構造体
 		//内容
 		std::string contents;
 		//優先度
-		Priority priority;
+		//Priority priority;
+		std::string priority;
 		//期限
 		int limit;
 		//ステータス(未完了/完了)
-		bool status;
+		//bool status;
+		std::string status;
 	};
 
 public: //静的関数
@@ -93,7 +95,7 @@ public:
 
 	
 	//ゲッター
-	bool GetStatus() const { return info_.status; }
+	std::string GetStatus() const { return info_.status; }
 
 	Info GetInfo() { return info_; };
 

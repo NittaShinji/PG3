@@ -33,9 +33,7 @@ public:
 	//ë}ì¸
 	void InsertUpdate();
 	//çÌèú
-	//void DeleteUpdate();
-	//ï¿Ç—ë÷Ç¶
-	//void SortUpdate();
+	void DeleteUpdate();
 	//ÉzÅ[ÉÄÇ…ñﬂÇÈ
 	void ReturnHome();
 
@@ -48,7 +46,7 @@ private:
 		DISPLAY,
 		EDIT,
 		INSERT,
-		//DELETE,
+		EDITDELETE,
 		SORT,
 
 		CLOSE,

@@ -51,8 +51,13 @@ private:
 
 	PersonIC personIc_;
 
-public: //ゲッター
+public: 
 
+	//ゲッター
 	PersonIC GetPersonIc() { return personIc_; };
+	//セッター
+	void SetPicID(int changeId);
+	void SetPicName(std::string changePicName);
+	void SetPicClassName(int changePicClass);
 
 };
